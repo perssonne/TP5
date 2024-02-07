@@ -5,10 +5,10 @@ Il suffit de modifier les méthodes nécessaires à votre jeu.
 import random
 
 import arcade
-#import arcade.gui
+import arcade.gui
 
-#from attack_animation import AttackType, AttackAnimation
-#from game_state import GameState
+from attack_animation import AttackType, AttackAnimation
+from game_state import GameState
 
 SCREEN_WIDTH = 1024
 SCREEN_HEIGHT = 600
@@ -31,6 +31,7 @@ class MyGame(arcade.Window):
    ATTACK_FRAME_WIDTH = 154 / 2
    ATTACK_FRAME_HEIGHT = 154 / 2
 
+
    def __init__(self, width, height, title):
        super().__init__(width, height, title)
 
@@ -50,6 +51,7 @@ class MyGame(arcade.Window):
        self.player_won_round = None
        self.draw_round = None
        self.game_state = None
+       self.coin_list = arcade.SpriteList()
 
    def setup(self):
        """
@@ -58,8 +60,27 @@ class MyGame(arcade.Window):
        """
        # C'est ici que vous allez créer vos listes de sprites et vos sprites.
        # Prenez note que vous devriez attribuer une valeur à tous les attributs créés dans __init__
-        
-       pass
+
+       for i in range(10):
+           rock = arcade.Sprite("assets/xssrock.png")
+           paper = arcade.Sprite("https://lh3.googleusercontent.com/drive-storage/ANtge_EiN68zO_dRWWFaQNAdC_EfF08cte7kWcj8LYo5r1OMdhZSAZJu9PcqN9iJwDXzLgr79VZT222sFhQtonrkkWPUdPQwNLNs4ho1PFUk0Q=w1477-h862")
+           scissors = arcade.Sprite("https://lh3.googleusercontent.com/drive-storage/ANtge_E4kMyyUyu_h9WcCjTZXgixteukQ7bfcUYV64jZH3WNN0oDwRNbu4woMxIkx_ZpbjTNpNGO1rV5M7Dg02z5YoRb0G-2Qv8wcPCz4PnpnQ=w1477-h862")
+           self.coin_list.append(rock, paper, scissors)
+
+       self.player = None
+       self.computer = None
+       self.players = None
+       self.rock = rock
+       self.paper = paper
+       self.scissors = scissors
+       self.player_score = 0
+       self.computer_score = 0
+       self.player_attack_type = {}
+       self.computer_attack_type = None
+       self.player_attack_chosen = False
+       self.player_won_round = None
+       self.draw_round = None
+       self.game_state = None
 
 
 
