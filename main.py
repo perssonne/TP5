@@ -7,8 +7,8 @@ import random
 import arcade
 #import arcade.gui
 
-#from attack_animation import AttackType, AttackAnimation
-#from game_state import GameState
+from attack_animation import AttackType, AttackAnimation
+from game_state import GameState
 
 SCREEN_WIDTH = 1024
 SCREEN_HEIGHT = 600
@@ -58,7 +58,7 @@ class MyGame(arcade.Window):
        """
        # C'est ici que vous allez créer vos listes de sprites et vos sprites.
        # Prenez note que vous devriez attribuer une valeur à tous les attributs créés dans __init__
-        
+
        pass
 
 
@@ -155,11 +155,11 @@ class MyGame(arcade.Window):
        """
        Réinitialiser les variables qui ont été modifiées
        """
-       #self.computer_attack_type = -1
-       #self.player_attack_chosen = False
-       #self.player_attack_type = {AttackType.ROCK: False, AttackType.PAPER: False, AttackType.SCISSORS: False}
-       #self.player_won_round = False
-       #self.draw_round = False
+       self.computer_attack_type = -1
+       self.player_attack_chosen = False
+       self.player_attack_type = {AttackType.ROCK: False, AttackType.PAPER: False, AttackType.SCISSORS: False}
+       self.player_won_round = False
+       self.draw_round = False
 
        pass
 

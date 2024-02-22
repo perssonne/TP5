@@ -8,7 +8,7 @@ class GameState(Enum):
     def __init__(self):
         super.__init__()
 
-    def on_key_press:
+    def on_key_press(self):
         pass
 
 
