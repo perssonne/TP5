@@ -14,7 +14,6 @@ class AttackType(Enum):
         self.paper = AttackAnimation(AttackType.PAPER)
         self.scissors = AttackAnimation(AttackType.SCISSORS)
 
-
 class AttackAnimation(arcade.Sprite):
    ATTACK_SCALE = 0.50
    ANIMATION_SPEED = 5.0
