@@ -8,11 +8,12 @@ import arcade
 #import arcade.gui
 
 from attack_animation import AttackType, AttackAnimation
-from game_state import GameState
+#from game_state import GameState
 
 SCREEN_WIDTH = 1024
 SCREEN_HEIGHT = 600
 SCREEN_TITLE = "Roche, papier, ciseaux"
+SCREEN_SUBTITLE = "Appuyer sur une image pour faire une attaque!"
 DEFAULT_LINE_HEIGHT = 45  # The default line height for text.
 
 
@@ -76,6 +77,15 @@ class MyGame(arcade.Window):
        (si aucune attaque n'a été sélectionnée, il faut dessiner les trois possibilités)
        (si une attaque a été sélectionnée, il faut dessiner cette attaque)
        """
+       if game_state == 0:
+
+           rock = arcade.Sprite("(assets/srock.png)")
+           rock.center_x = 275
+           rock.center_y = 150
+           rock.scale = 0.3
+           rock.draw()
+
+
        pass
 
    def draw_computer_attack(self):
@@ -116,6 +126,15 @@ class MyGame(arcade.Window):
                         width=SCREEN_WIDTH,
                         align="center")
 
+       arcade.draw_text(SCREEN_SUBTITLE,
+                        0,
+                        SCREEN_HEIGHT - DEFAULT_LINE_HEIGHT * 4,
+                        arcade.color.AERO_BLUE,
+                        40,
+                        width=SCREEN_WIDTH,
+                        align="center")
+
+
        self.draw_instructions()
        self.players.draw()
        self.draw_possible_attack()
@@ -149,6 +168,8 @@ class MyGame(arcade.Window):
        Pour connaître la liste des touches possibles:
        http://arcade.academy/arcade.key.html
        """
+
+
        pass
 
    def reset_round(self):
