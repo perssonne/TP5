@@ -22,6 +22,7 @@ class AttackAnimation(arcade.Sprite):
        self.SCISSORS = ("(assets/scissors.png)")
 
    def on_update(self, delta_time: float = 1 / 60):
+
        # Update the animation.
        self.current_texture += 1
        if self.current_texture < len(self.textures):

@@ -8,7 +8,7 @@ import arcade
 #import arcade.gui
 
 from attack_animation import AttackType, AttackAnimation
-#from game_state import GameState
+from game_state import GameState
 
 SCREEN_WIDTH = 1024
 SCREEN_HEIGHT = 600
@@ -50,7 +50,7 @@ class MyGame(arcade.Window):
        self.player_attack_chosen = False
        self.player_won_round = None
        self.draw_round = None
-       self.game_state = None
+       self.game_state = GameState
 
    def setup(self):
        """
@@ -63,7 +63,6 @@ class MyGame(arcade.Window):
        pass
 
 
-
    def validate_victory(self):
        """
        Utilisé pour déterminer qui obtient la victoire (ou s'il y a égalité)
@@ -72,19 +71,31 @@ class MyGame(arcade.Window):
 
 
    def draw_possible_attack(self):
+
        """
        Méthode utilisée pour dessiner toutes les possibilités d'attaque du joueur
        (si aucune attaque n'a été sélectionnée, il faut dessiner les trois possibilités)
        (si une attaque a été sélectionnée, il faut dessiner cette attaque)
        """
-       if game_state == 0:
 
-           rock = arcade.Sprite("(assets/srock.png)")
-           rock.center_x = 275
-           rock.center_y = 150
-           rock.scale = 0.3
-           rock.draw()
 
+       rock = arcade.Sprite("(assets/srock.png)")
+       rock.center_x = 275
+       rock.center_y = 150
+       rock.scale = 0.3
+       rock.draw()
+
+       paper = arcade.Sprite("(assets/spaper.png)")
+       paper.center_x = 275
+       paper.center_y = 150
+       paper.scale = 0.3
+       paper.draw()
+
+       scissors = arcade.Sprite("(assets/scissors.png)")
+       scissors.center_x = 275
+       scissors.center_y = 150
+       scissors.scale = 0.3
+       scissors.draw()
 
        pass
 
@@ -136,7 +147,7 @@ class MyGame(arcade.Window):
 
 
        self.draw_instructions()
-       self.players.draw()
+       # self.players.draw()
        self.draw_possible_attack()
        self.draw_scores()
 
@@ -158,6 +169,7 @@ class MyGame(arcade.Window):
        pass
 
    def on_key_press(self, key, key_modifiers):
+
        """
        Cette méthode est invoquée à chaque fois que l'usager tape une touche
        sur le clavier.
@@ -169,6 +181,7 @@ class MyGame(arcade.Window):
        http://arcade.academy/arcade.key.html
        """
 
+       self.on_key_press(key)
 
        pass
 
