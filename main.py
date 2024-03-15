@@ -5,6 +5,8 @@ Il suffit de modifier les méthodes nécessaires à votre jeu.
 import random
 
 import arcade
+from enum import Enum
+from enum import Flag, auto
 #import arcade.gui
 
 from attack_animation import AttackType, AttackAnimation
@@ -13,7 +15,12 @@ from game_state import GameState
 SCREEN_WIDTH = 1024
 SCREEN_HEIGHT = 600
 SCREEN_TITLE = "Roche, papier, ciseaux"
-SCREEN_SUBTITLE = "Appuyer sur une image pour faire une attaque!"
+SCREEN_SUBTITLE_UN = "Appuyer sur une image pour faire une attaque!"
+SCREEN_SUBTITLE_DEUX = "Appuyer sur 'ESPACE' pour commencer une nouvelle ronde!"
+SCREEN_SUBTITLE_TROIS = "Vous avez gagné la partie!
+                        "La partie est terminée.  \
+                        Appuyer sur 'ESPACE' pour débuter une nouvelle partie!"
+
 DEFAULT_LINE_HEIGHT = 45  # The default line height for text.
 
 
@@ -50,7 +57,9 @@ class MyGame(arcade.Window):
        self.player_attack_chosen = False
        self.player_won_round = None
        self.draw_round = None
-       self.game_state = GameState
+       self.game_state = 3
+
+
 
    def setup(self):
        """
@@ -79,23 +88,23 @@ class MyGame(arcade.Window):
        """
 
 
-       rock = arcade.Sprite("(assets/srock.png)")
+       rock = arcade.Sprite#("(assets/srock.png)")
        rock.center_x = 275
        rock.center_y = 150
        rock.scale = 0.3
-       rock.draw()
+       # rock.draw(self)
 
-       paper = arcade.Sprite("(assets/spaper.png)")
+       paper = arcade.Sprite#("(assets/spaper.png)")
        paper.center_x = 275
        paper.center_y = 150
        paper.scale = 0.3
-       paper.draw()
+       # paper.draw(self)
 
-       scissors = arcade.Sprite("(assets/scissors.png)")
+       scissors = arcade.Sprite#("(assets/scissors.png)")
        scissors.center_x = 275
        scissors.center_y = 150
        scissors.scale = 0.3
-       scissors.draw()
+       # scissors.draw(self)
 
        pass
 
@@ -116,7 +125,34 @@ class MyGame(arcade.Window):
        """
        Dépendemment de l'état de jeu, afficher les instructions d'utilisation au joueur (appuyer sur espace, ou sur une image)
        """
-       pass
+       if self.game_state == 1:
+           arcade.draw_text(SCREEN_SUBTITLE_UN,
+                                    0,
+                                    SCREEN_HEIGHT - DEFAULT_LINE_HEIGHT * 4,
+                                    arcade.color.AERO_BLUE,
+                                    40,
+                                    width=SCREEN_WIDTH,
+                                    align="center")
+
+       elif self.game_state == 2:
+           arcade.draw_text(SCREEN_SUBTITLE_DEUX,
+                            0,
+                            SCREEN_HEIGHT - DEFAULT_LINE_HEIGHT * 4,
+                            arcade.color.AERO_BLUE,
+                            40,
+                            width=SCREEN_WIDTH,
+                            align="center")
+
+       elif self.game_state == 3:
+           arcade.draw_text(SCREEN_SUBTITLE_TROIS,
+                            0,
+                            SCREEN_HEIGHT - DEFAULT_LINE_HEIGHT * 4,
+                            arcade.color.AERO_BLUE,
+                            40,
+                            width=SCREEN_WIDTH,
+                            align="center")
+       else:
+           pass
 
    def on_draw(self):
        """
@@ -137,17 +173,9 @@ class MyGame(arcade.Window):
                         width=SCREEN_WIDTH,
                         align="center")
 
-       arcade.draw_text(SCREEN_SUBTITLE,
-                        0,
-                        SCREEN_HEIGHT - DEFAULT_LINE_HEIGHT * 4,
-                        arcade.color.AERO_BLUE,
-                        40,
-                        width=SCREEN_WIDTH,
-                        align="center")
-
 
        self.draw_instructions()
-       # self.players.draw()
+       #self.players.draw()
        self.draw_possible_attack()
        self.draw_scores()
 
@@ -166,6 +194,8 @@ class MyGame(arcade.Window):
        #vérifier si le jeu est actif (ROUND_ACTIVE) et continuer l'animation des attaques
        #si le joueur a choisi une attaque, générer une attaque de l'ordinateur et valider la victoire
        #changer l'état de jeu si nécessaire (GAME_OVER)
+
+
        pass
 
    def on_key_press(self, key, key_modifiers):
@@ -181,7 +211,8 @@ class MyGame(arcade.Window):
        http://arcade.academy/arcade.key.html
        """
 
-       self.on_key_press(key)
+       self.gamestate = Enum('GameState', ['NOT_STARTED', 'ROUND_ACTIVE', 'ROUND_DONE', 'GAME_OVER'])
+       self.game_state += 1
 
        pass
 
